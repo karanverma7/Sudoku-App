@@ -1,3 +1,5 @@
+import Card from './card';
 import Content from './content';
+import Title from './title';
 
-export { Content }
+export { Card, Content, Title }
