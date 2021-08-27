@@ -26,5 +26,17 @@ export const Container = styled.div`
         &:hover {
         background-color: ${theme.colors.lightBlue};
         }
+
+        &:nth-child(1) {
+        border-left: 4px solid ${theme.colors.black};
+        }
+
+        &:nth-child(3), &:nth-child(6) {
+        border-right: 3px solid ${theme.colors.black};
+        }
+
+        &:nth-child(9) {
+        border-right: 4px solid ${theme.colors.black};
+        }
     `}
 `
