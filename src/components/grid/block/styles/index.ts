@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.div`
+const index = styled.div`
     ${({ theme }) => css`
         align-items: center;
         background-color: ${theme.colors.white};
@@ -37,3 +37,5 @@ export const Container = styled.div`
         }
     `}
 `
+
+export default index

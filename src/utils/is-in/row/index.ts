@@ -6,8 +6,9 @@ interface IInput {
     value: NUMBER;
 }
 
-const isInRow = ({ grid, row, value }: IInput): boolean => {
+//  Checking if the value is in row of the grid 
+const index = ({ grid, row, value }: IInput): boolean => {
     return grid[row].includes(value)
 }
 
-export default isInRow
+export default index

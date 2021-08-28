@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const Index = styled.div`
+const index = styled.div`
     ${({theme}) => css`
         background-color: ${theme.colors.white};
         border-radius: 15px;
@@ -9,4 +9,4 @@ const Index = styled.div`
         padding: 15px;
     `}
 `
-export default Index;
+export default index;

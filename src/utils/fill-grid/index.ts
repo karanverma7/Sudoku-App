@@ -1,7 +1,17 @@
 import { GRID } from 'typings'
-import { Shuffle, isInRow, isInColumn, numbersList } from 'utils'
+import { 
+    shuffle, 
+    isInRow, 
+    isInColumn, 
+    isInSquare, 
+    numbersList, 
+    getWorkingSquare, 
+    checkGrid, 
+    fillGrid 
+} from 'utils'
 
-const fillGrid = (grid: GRID) => {
+//  Fill the Sudoku grid with random numbers
+const index = (grid: GRID) => {
     let row = 0;
     let column = 0;
 
@@ -10,17 +20,22 @@ const fillGrid = (grid: GRID) => {
         column = i % 9; 
 
         if(grid[row][column] === 0){
-            Shuffle(numbersList)
-            let value: any
+            shuffle(numbersList)
 
-            for(value in numbersList){
+            for(let value of numbersList)
                 if(!isInRow({ grid, row, value })) 
                     if(!isInColumn({ grid, column, value })) {
-
+                        const square = getWorkingSquare({ grid, row, column })
+                        if(!isInSquare({ square, value })) {
+                            grid[row][column] = value 
+                            if(checkGrid(grid)) return true
+                            else if(fillGrid(grid)) return true
+                        }
                     }
-            }
+            break
         }
     }
+    grid[row][column] = 0
 }
 
-export default fillGrid
+export default index

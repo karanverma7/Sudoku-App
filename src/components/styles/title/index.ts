@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 
-const Index = styled.h1`
+const index = styled.h1`
     ${({ theme }) => css`
         color: ${theme.colors.white};
         margin-top: 0;
@@ -8,4 +8,4 @@ const Index = styled.h1`
     `}
 `
 
-export default Index;
+export default index;

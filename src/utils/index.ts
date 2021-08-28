@@ -1,6 +1,8 @@
-import FillGrid from './fill-grid'
-import Shuffle from './shuffle-array'
-import { isInRow, isInColumn } from './is-in'
-import { numbersList, initialGrid } from './config'
+import fillGrid from './fill-grid'
+import shuffle from './shuffle-array'
+import getWorkingSquare from './identify-square'
+import checkGrid from './check-grid'
 
-export { numbersList, initialGrid, FillGrid, Shuffle, isInRow, isInColumn }
+export * from './is-in'
+export * from './config'
+export { fillGrid, shuffle, getWorkingSquare, checkGrid }
