@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { reportWebVitals } from 'core';
+import { reportWebVitals, configureStore } from 'core';
 import { GlobalStyles, theme } from 'styles';
 import { ThemeProvider } from 'styled-components';
 import { Card, Content, Title, Grid } from 'components';
+import { Provider } from 'react-redux';
+
+const store = configureStore()
 
 const App: React.FC = () => {
   return (
@@ -17,7 +20,9 @@ const App: React.FC = () => {
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <GlobalStyles />
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </ ThemeProvider>,
   document.getElementById('root')
 );

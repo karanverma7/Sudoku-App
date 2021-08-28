@@ -7,7 +7,6 @@ describe('fillGrid', () => {
         const grid: GRID = emptyGrid
 
         fillGrid(grid)
-        console.log(grid)
         for(let row in grid) 
             for( let column in grid[row]) {
                 expect(grid[row][column]).toBeGreaterThanOrEqual(1)
@@ -29,7 +28,6 @@ describe('fillGrid', () => {
         ]
 
         fillGrid(grid)
-        console.log(grid)
         for(let row in grid) 
             for( let column in grid[row]) {
                 expect(grid[row][column]).toBeGreaterThanOrEqual(1)
