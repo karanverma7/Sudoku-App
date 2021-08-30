@@ -12,6 +12,11 @@ const reducer = (state = initialState, action: AnyAction ): IReducer => {
                 ...state,
                 grid: createFullGrid()
             }
+        case types.SET_SELECTED_BLOCK: 
+            return {
+                ...state,
+                selectedBlock: action.payload
+            }
         default:
             return state
     }

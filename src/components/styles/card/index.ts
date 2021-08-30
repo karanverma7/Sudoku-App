@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import gameBg from 'images/gameBg.png';
 
 const index = styled.div`
     ${({theme}) => css`
@@ -7,6 +8,9 @@ const index = styled.div`
         display: flex;
         flex-direction: column;
         padding: 15px;
+        margin: 0 20px;
+        box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.6);
+        background-image: ${`url(${gameBg})`}
     `}
 `
 export default index;

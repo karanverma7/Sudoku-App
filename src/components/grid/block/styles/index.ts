@@ -1,10 +1,15 @@
 import styled, { css } from "styled-components";
 
-const index = styled.div`
-    ${({ theme }) => css`
+interface IProps {
+    isActive?: boolean;
+}
+
+const index = styled.div<IProps>`
+    ${({ isActive, theme }) => css`
         align-items: center;
-        background-color: ${theme.colors.white};
         border: solid 1px ${theme.colors.black};
+        background-color: ${isActive ? theme.colors.black : ''};
+        color: ${isActive ? theme.colors.white : ''};
         cursor: pointer;
         display: flex;
         flex-grow: 1;
@@ -21,7 +26,8 @@ const index = styled.div`
         }
 
         &:hover {
-        background-color: ${theme.colors.lightBlue};
+        background-color: ${theme.colors.black};
+        color: ${theme.colors.white}
         }
 
         &:nth-child(1) {

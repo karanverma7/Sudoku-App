@@ -1,24 +1,32 @@
 import React from 'react'
 import Container from './styles'
-import { N } from 'typings'
-import { IReducer } from 'reducers'
-import { useSelector } from 'react-redux'
+import { INDEX, N } from 'typings'
+import { IReducer, setSelectedBlock } from 'reducers'
+import { useDispatch, useSelector } from 'react-redux'
+import { Dispatch, AnyAction } from 'redux'
 
 interface IProps {
-    colIndex: number;
-    rowIndex: number;
+    colIndex: INDEX;
+    rowIndex: INDEX;
 }
 
 interface IState {
     value: N;
+    isActive: boolean;
 }
 
 const Index: React.FC<IProps> = ({ colIndex, rowIndex }) => {
-    const state = useSelector<IReducer, IState>(({ grid }) => ({
-        value: grid ? grid[rowIndex][colIndex] : 0
+    const dispatch = useDispatch<Dispatch<AnyAction>>();
+    const state = useSelector<IReducer, IState>((state) => ({
+        value: state.grid ? state.grid[rowIndex][colIndex] : 0,
+        isActive: state.selectedBlock && (state.selectedBlock[0] === rowIndex && state.selectedBlock[1] === colIndex) ? true : false,
     }))
     
-    return <Container data-cy={`Block:${rowIndex}${colIndex}`}>
+    const handleClick = () => {
+        return !state.isActive && dispatch(setSelectedBlock([rowIndex, colIndex]));
+    }
+
+    return <Container isActive={state.isActive} data-cy={`Block:${rowIndex}${colIndex}`} onClick={handleClick}>
         {state.value === 0 ? '' : state.value}
     </Container>
 }

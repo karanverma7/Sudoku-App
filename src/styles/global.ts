@@ -1,4 +1,5 @@
-import { createGlobalStyle, css } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components'
+import bgImage from '../images/bgImage.png'
 
 export default createGlobalStyle`
     ${({ theme }) => css`
@@ -12,14 +13,12 @@ export default createGlobalStyle`
                 margin: 0;
 
                 #root {
-                    background: ${theme.colors.background};
+                    background-image: ${`url(${bgImage})`};
+                    background-position: center;
+                    background-size: cover;
                     color: ${theme.colors.black};
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
                     height: 100%;
                     font-family: sans-serif;
-                    padding: 20px;
                 }
             }
         }`

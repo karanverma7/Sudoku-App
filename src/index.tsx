@@ -3,17 +3,19 @@ import ReactDOM from 'react-dom';
 import { reportWebVitals, configureStore } from 'core';
 import { GlobalStyles, theme } from 'styles';
 import { ThemeProvider } from 'styled-components';
-import { Card, Content, Title, Grid } from 'components';
+import { Card, Content, Title, Grid, Sudoku } from 'components';
 import { Provider } from 'react-redux';
 
 const store = configureStore()
 
 const App: React.FC = () => {
   return (
-    <Content data-cy="content">
-      <Title data-cy="title">Sudoku</Title>
-      <Card data-cy="card"><Grid /></Card>
-    </ Content>
+    <Content data-dy="content">
+      <Sudoku data-cy="sudoku">
+        <Title data-cy="title">Sudoku</Title>
+        <Card data-cy="card"><Grid /></Card>
+      </ Sudoku>
+    </Content>
   )
 }
 
