@@ -2,6 +2,9 @@ import styled, { css } from "styled-components";
 
 const index = styled.div`
 ${({ theme }) => css`   
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: ${theme.colors.black};
     color: ${theme.colors.white};
     border-radius: 5px;
@@ -11,9 +14,9 @@ ${({ theme }) => css`
     transition: ${theme.transition};
 
     &:hover {
-        background-color: ${theme.colors.white};
+        background-color: transparent;
         color: ${theme.colors.black};
-        opacity: 0.8;
+        font-weight: bold;
     }
 `}`
 

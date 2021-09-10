@@ -31,7 +31,7 @@ export const NumbersInput: React.FC = () => {
     return (
         <Container>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(value => 
-                <Button onClick={() => fillBlock(value as NUMBER)}>{value}</Button>
+                <Button key={value} onClick={() => fillBlock(value as NUMBER)}>{value}</Button>
             )}
         </ Container>
     )

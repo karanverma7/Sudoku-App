@@ -1,5 +1,5 @@
 import { createGlobalStyle, css } from 'styled-components'
-import bgImage from '../images/bgImage.png'
+import bgImage from 'images/bgImage.png'
 
 export default createGlobalStyle`
     ${({ theme }) => css`

@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { reportWebVitals, configureStore } from 'core';
+import { reportWebVitals, configureStore, register } from 'core';
+import { PersistGate } from 'redux-persist/integration/react';
 import { GlobalStyles, theme } from 'styles';
 import { ThemeProvider } from 'styled-components';
-import { Card, Content, Title, Grid, Sudoku, NumbersInput } from 'components';
+import { Card, Content, Title, Grid, Sudoku, NumbersInput, NewGameButton } from 'components';
 import { Provider } from 'react-redux';
 
-const store = configureStore()
+const {store, persistor} = configureStore()
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
       <Sudoku data-cy="sudoku">
         <Title data-cy="title">Sudoku</Title>
         <Card data-cy="card">
+          <NewGameButton />
           <Grid />
           <NumbersInput />
         </Card>
@@ -26,10 +28,14 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <GlobalStyles />
     <Provider store={store}>
-      <App />
+      <PersistGate persistor={persistor} loading={null}>
+        <App />
+      </PersistGate>
     </Provider>
   </ ThemeProvider>,
   document.getElementById('root')
 );
 
 reportWebVitals();
+
+register();

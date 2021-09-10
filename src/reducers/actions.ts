@@ -1,4 +1,3 @@
-import { type } from 'os'
 import { Action, AnyAction } from 'redux'
 import { BLOCK_COORDS, NUMBER } from 'typings'
 import * as types from './types'
