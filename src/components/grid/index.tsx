@@ -4,48 +4,63 @@ import { Container, Row } from './styles'
 import Block from './block'
 import { Dispatch, AnyAction } from 'redux'
 import { useDispatch, useSelector} from 'react-redux'
-import { createGrid, setSelectedBlock, IReducer } from 'reducers'
-import { BLOCK_COORDS, INDEX } from 'typings'
+import { createGrid, setSelectedBlock, IReducer, fillSelectedBlock } from 'reducers'
+import { BLOCK_COORDS, INDEX, N, NUMBER } from 'typings'
 
 interface IState {
-    selectedBlock?: BLOCK_COORDS
+    selectedBlockCoords?: BLOCK_COORDS,
+    selectedValue?: N,
 }
 
 export const Grid: React.FC = () => {
     const dispatch = useDispatch<Dispatch<AnyAction>>()
     const createGridHelper = useCallback(() => dispatch(createGrid()), [dispatch])
-    const state = useSelector<IReducer, IState>(({ selectedBlock }) => ({
-        selectedBlock
+    const { selectedBlockCoords, selectedValue } = useSelector<IReducer, IState>(({ selectedBlock, workingGrid }) => ({
+        selectedBlockCoords: selectedBlock,
+        selectedValue: workingGrid && selectedBlock
+            ? workingGrid[selectedBlock[0]][selectedBlock[1]]
+            : 0,
     }))
 
     useEffect(() => {
         createGridHelper()
     }, [createGridHelper])
 
-    const moveUp = () => {
-        return state.selectedBlock && state.selectedBlock[0] > 0 &&
-            dispatch(setSelectedBlock([(state.selectedBlock[0]-1 as INDEX), state.selectedBlock[1]]))
-    }
+    const fillBlock = useCallback(
+        (value: NUMBER) => {
+          if (selectedBlockCoords && selectedValue === 0)
+            dispatch(fillSelectedBlock(value, selectedBlockCoords))
+        },
+        [dispatch, selectedBlockCoords, selectedValue]
+      )
+    
+    useMouseTrap('1', () => fillBlock(1))
+    useMouseTrap('2', () => fillBlock(2))
+    useMouseTrap('3', () => fillBlock(3))
+    useMouseTrap('4', () => fillBlock(4))
+    useMouseTrap('5', () => fillBlock(5))
+    useMouseTrap('6', () => fillBlock(6))
+    useMouseTrap('7', () => fillBlock(7))
+    useMouseTrap('8', () => fillBlock(8))
+    useMouseTrap('9', () => fillBlock(9))
 
-    const moveDown = () => {
-        return state.selectedBlock && state.selectedBlock[0] < 8 &&
-            dispatch(setSelectedBlock([(state.selectedBlock[0]+1 as INDEX), state.selectedBlock[1]]))
+    useMouseTrap('up', () => {
+        return selectedBlockCoords && selectedBlockCoords[0] > 0 &&
+            dispatch(setSelectedBlock([(selectedBlockCoords[0]-1 as INDEX), selectedBlockCoords[1]]))
+    })
+    useMouseTrap('down', () => {
+        return selectedBlockCoords && selectedBlockCoords[0] < 8 &&
+            dispatch(setSelectedBlock([(selectedBlockCoords[0]+1 as INDEX), selectedBlockCoords[1]]))
+    })
+    useMouseTrap('left', () => {
+        return selectedBlockCoords && selectedBlockCoords[1] > 0 &&
+            dispatch(setSelectedBlock([selectedBlockCoords[0], (selectedBlockCoords[1]-1 as INDEX)]))
     }
-
-    const moveLeft = () => {
-        return state.selectedBlock && state.selectedBlock[1] > 0 &&
-            dispatch(setSelectedBlock([state.selectedBlock[0], (state.selectedBlock[1]-1 as INDEX)]))
-    }
-
-    const moveRight = () => {
-        return state.selectedBlock && state.selectedBlock[1] < 8 &&
-            dispatch(setSelectedBlock([state.selectedBlock[0], (state.selectedBlock[1]+1 as INDEX)]))
-    }
-
-    useMouseTrap('up', moveUp)
-    useMouseTrap('down', moveDown)
-    useMouseTrap('left', moveLeft)
-    useMouseTrap('right', moveRight)
+)
+    useMouseTrap('right', () => {
+        return selectedBlockCoords && selectedBlockCoords[1] < 8 &&
+            dispatch(setSelectedBlock([selectedBlockCoords[0], (selectedBlockCoords[1]+1 as INDEX)]))
+    })
 
     return (
         <Container data-cy="grid-container">

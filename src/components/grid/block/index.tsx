@@ -13,21 +13,31 @@ interface IProps {
 interface IState {
     value: N;
     isActive: boolean;
+    isUserInput: boolean;
 }
 
 const Index: React.FC<IProps> = ({ colIndex, rowIndex }) => {
     const dispatch = useDispatch<Dispatch<AnyAction>>();
-    const state = useSelector<IReducer, IState>((state) => ({
-        value: state.grid ? state.grid[rowIndex][colIndex] : 0,
-        isActive: state.selectedBlock && (state.selectedBlock[0] === rowIndex && state.selectedBlock[1] === colIndex) ? true : false,
+    const { value, isActive, isUserInput } = useSelector<IReducer, IState>
+    (({selectedBlock, workingGrid, challengeGrid}) => ({
+        value: workingGrid ? workingGrid[rowIndex][colIndex] : 0,
+        isActive: selectedBlock 
+            && (selectedBlock[0] === rowIndex 
+            && selectedBlock[1] === colIndex)
+            ? true 
+            : false,
+        isUserInput: challengeGrid 
+            ? challengeGrid[rowIndex][colIndex] === 0 
+            : false,
     }))
     
     const handleClick = () => {
-        return !state.isActive && dispatch(setSelectedBlock([rowIndex, colIndex]));
+        return !isActive && dispatch(setSelectedBlock([rowIndex, colIndex]));
     }
+    console.log({isUserInput})
 
-    return <Container isActive={state.isActive} data-cy={`Block:${rowIndex}${colIndex}`} onClick={handleClick}>
-        {state.value === 0 ? '' : state.value}
+    return <Container isUserInput={isUserInput} isActive={isActive} data-cy={`Block:${rowIndex}${colIndex}`} onClick={handleClick}>
+        {value === 0 ? '' : value}
     </Container>
 }
 
