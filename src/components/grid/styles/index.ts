@@ -17,7 +17,7 @@ export const Row = styled.div`
     }
 
     &:nth-child(3), &:nth-child(6) {
-      border-bottom: 3px solid ${theme.colors.black};
+      border-bottom: 1px solid ${theme.colors.black};
     }
 
     &:nth-child(9) {
