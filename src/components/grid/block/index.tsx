@@ -34,7 +34,6 @@ const Index: React.FC<IProps> = ({ colIndex, rowIndex }) => {
     const handleClick = () => {
         return !isActive && dispatch(setSelectedBlock([rowIndex, colIndex]));
     }
-    console.log({isUserInput})
 
     return <Container isUserInput={isUserInput} isActive={isActive} data-cy={`Block:${rowIndex}${colIndex}`} onClick={handleClick}>
         {value === 0 ? '' : value}
